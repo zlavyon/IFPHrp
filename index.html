@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | IFPH</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dist/output.css">
     <style>
         /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
         /* Primary Text: #E1E1E1 (Light Silver) */
         /* Accent/CTA/Title: #FFB703 (Vivid Gold-Orange) */
         /* Card/Footer Background: #1D2429 (Charcoal Blue-Black) */
-        
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
             /* APPLIED SUBTLE VERTICAL GRADIENT */
             background: linear-gradient(to bottom, #293438 0%, #0F1314 100%);
-            background-attachment: fixed; /* Ensures gradient covers the entire viewport */
-            min-height: 100vh; /* Ensures body covers full screen height */
-            color: #E1E1E1; /* New Default Text Color (Silver) */
+            background-attachment: fixed;
+            /* Ensures gradient covers the entire viewport */
+            min-height: 100vh;
+            /* Ensures body covers full screen height */
+            color: #E1E1E1;
+            /* New Default Text Color (Silver) */
         }
-        h1, h2, h3, h4 {
+
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Rajdhani', sans-serif;
         }
-        
+
         /* Hero Section Styling */
         .hero-bg {
             /* PATH CHANGED TO LOOK FOR .JPG EXTENSION */
             /* NOTE: This will appear as a broken image in the preview */
-            background-image: url('https://placehold.co/1200x800/293438/E1E1E1?text=SPACE+BACKGROUND+PLACEHOLDER'); 
+            background-image: url('hero-bg.jpg');
             background-size: cover;
             background-position: center;
             position: relative;
         }
+
         .hero-bg::before {
             content: '';
             position: absolute;
@@ -44,95 +53,141 @@
             /* Dark transparent overlay matching gradient colors for readability */
             background: linear-gradient(180deg, rgba(41, 52, 56, 0.8) 0%, rgba(41, 52, 56, 0.5) 50%, rgba(15, 19, 20, 0.8) 100%);
         }
+
         .section-header::after {
             content: '';
             display: block;
-            width: 80px;
+            width: 425px;
             height: 3px;
-            background-color: #FFB703; /* Gold-Orange Accent */
+            background-color: #FFB703;
+            /* Gold-Orange Accent */
             margin-top: 10px;
             border-radius: 9999px;
         }
+
+        .section-header::after2 {
+            content: '';
+            display: block;
+            width: 225px;
+            height: 3px;
+            background-color: #FFB703;
+            /* Gold-Orange Accent */
+            margin-top: 10px;
+            border-radius: 9999px;
+        }
+
         .cta-button {
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.5); /* Gold-Orange Shadow */
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.5);
+            /* Gold-Orange Shadow */
         }
+
         /* Table Styles (using darkest palette colors for required white text contrast) */
         .req-header {
-            background-color: #1D2429; /* Charcoal Blue-Black */
-            color: white; 
+            background-color: #1D2429;
+            /* Charcoal Blue-Black */
+            color: white;
         }
+
         .req-table-dark {
-            background-color: #1D2429; /* Charcoal Blue-Black */
+            background-color: #1D2429;
+            /* Charcoal Blue-Black */
         }
+
         .req-table-light {
-             background-color: #293438; /* Slightly lighter Charcoal */
+            background-color: #293438;
+            /* Slightly lighter Charcoal */
         }
+
         /* Card Styling */
         .focus-card {
-            background-color: #1D2429; /* Charcoal Blue-Black */
-            border: 1px solid #70707D; /* Dark Grey border */
+            background-color: #1D2429;
+            /* Charcoal Blue-Black */
+            border: 1px solid #70707D;
+            /* Dark Grey border */
             transition: border-color 0.3s, transform 0.3s;
         }
+
         .focus-card:hover {
-            border-color: #FFB703; /* Gold-Orange Accent */
+            border-color: #FFB703;
+            /* Gold-Orange Accent */
             transform: scale(1.02);
         }
+
         /* Referral Code Box Styles */
         .referral-box {
-            background-color: #1D2429; 
+            background-color: #1D2429;
             border: 1px solid #70707D;
         }
+
         .code-display {
-            background-color: #293438; /* Darker background for code */
-            color: #E1E1E1; /* Light Silver text for contrast */
+            background-color: #293438;
+            /* Darker background for code */
+            color: #E1E1E1;
+            /* Light Silver text for contrast */
             font-family: 'Rajdhani', monospace;
             font-size: 1.5rem;
             padding: 0.5rem;
             border-radius: 0.25rem;
             border: 1px dashed #FFB703;
         }
+
         /* Style for the new Member Stat Card */
         .stat-card {
-            background-color: #1D2429; 
+            background-color: #1D2429;
             border: 1px solid #FFB703;
             color: #E1E1E1;
         }
+
         /* Gallery Styles */
         .gallery-image {
             width: 100%;
-            height: 250px; /* Fixed height for consistent look */
+            height: 250px;
+            /* Fixed height for consistent look */
             object-fit: cover;
             border-radius: 8px;
             border: 2px solid #1D2429;
             transition: transform 0.3s, border-color 0.3s;
         }
+
         .gallery-image:hover {
             transform: scale(1.03);
             border-color: #FFB703;
         }
+
+        .hero-video-zoom {
+            transform: scale(1.5);
+            transform-origin: center;
+        }
     </style>
 </head>
+
 <body class="antialiased">
 
     <!-- Navigation Bar (Simple, Fixed) -->
     <header class="bg-[#1D2429] bg-opacity-90 sticky top-0 z-50 shadow-lg border-b border-[#FFB703]/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Left Side: Logo/Title -->
-            <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#E1E1E1] tracking-wider text-[#E1E1E1]">
+            <h1
+                class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#E1E1E1] tracking-wider text-[#E1E1E1]">
                 IFPH
             </h1>
-            
+
             <!-- Right Side: Navigation Links -->
             <div class="flex items-center space-x-4">
-                <a href="#hero" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
-                <a href="#mission" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
+                <a href="#hero"
+                    class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
+                <a href="#mission"
+                    class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our
+                    Mission</a>
                 <!-- Updated Nav Link: Galleria -->
-                <a href="#gallery" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Galleria</a>
-                
+                <a href="#gallery"
+                    class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Galleria</a>
+
                 <!-- AUDIO TOGGLE BUTTON REMOVED FROM NAV -->
             </div>
         </nav>
@@ -140,74 +195,99 @@
     </header>
 
     <!-- HIDDEN AUDIO PLAYER (Still present in code, but inactive) -->
-    <audio id="background-audio" loop>
-        <!-- FINAL PUBLIC LINK TO YOUR UPLOADED MP3 -->
-        <source src="/IFPHrp/audio/GalacticCommandOverture_FULL_SONG_MusicGPT.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+    <audio id="background-audio" autoplay loop muted>
+        <source src="media/GalacticCommandOverture_FULL_SONG_MusicGPT.mp3" type="audio/mpeg">
     </audio>
 
+
     <!-- 1. Hero Section: The Call to Action -->
-    <section id="hero" class="hero-bg h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
-        <div class="z-10 max-w-4xl space-y-8">
-            <!-- Centered Logo Above Text (Using placeholder for preview) -->
+    <section id="hero"
+        class="relative w-full h-screen overflow-hidden flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
+
+        <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover hero-video-zoom">
+            <source src="media/BG2 video.mp4" type="video/mp4">
+        </video>
+
+
+        <!-- DARK FADE OVERLAY -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
+
+        <!-- HERO CONTENT -->
+        <div class="relative z-10 max-w-4xl space-y-8">
+
+            <!-- Centered Logo -->
             <div class="flex justify-center mb-4">
-                <img src="https://placehold.co/100x100/1D2429/FFB703?text=LOGO" alt="IFPH Logo" class="h-48 w-auto">
+                <img src="media/Philippines-ArmadaIFPH_11_Logo.png" alt="IFPH Logo" class="h-48 w-auto drop-shadow-xl">
             </div>
-            <p class="uppercase tracking-widest text-sm sm:text-base text-[#E1E1E1]">OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN</p>
-            <h2 class="text-5xl sm:text-7xl font-black leading-tight shadow-text text-[#FFB703]">
-                INTERGALACTIC FEDERATION OF THE PHILIPPINE
-            </h2>
-            <p class="text-lg sm:text-xl max-w-2xl mx-auto text-[#E1E1E1]">
-                Working together, the federation’s integrated approach leverages our combined heritage and advanced work on individual job elements of the INTERGALACTIC SPACE FEDERATION of the PHILIPPINES
+
+            <p class="uppercase tracking-widest text-sm sm:text-base text-[#E1E1E1]">
+                OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN
             </p>
-            <!-- CTA Buttons (Discord, Fleetyard, and Learn More) -->
+
+            <h2 class="text-5xl sm:text-7xl font-black leading-tight text-[#FFB703] drop-shadow-xl">
+                INTERGALACTIC FEDERATION OF THE PHILIPPINES
+            </h2>
+
+            <p class="text-lg sm:text-xl max-w-2xl mx-auto text-[#E1E1E1]">
+                Working together, the federation’s integrated approach leverages our combined heritage and advanced work
+                on individual job elements of the INTERGALACTIC SPACE FEDERATION of the PHILIPPINES
+            </p>
+
+            <!-- CTA Buttons -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 max-w-5xl mx-auto">
-                <!-- Discord Button -->
-                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+                <!-- Discord -->
+                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank"
+                    class="cta-button inline-flex items-center justify-center px-4 py-3 rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] shadow-xl font-semibold transition duration-300">
                     Join Our Discord
                 </a>
-                <!-- Fleetyard Button -->
-                <a href="https://fleetyards.net/fleets/ifph/ships/?page=1" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
-                    <!-- Custom SVG Icon for Ships/Fleetyard -->
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m0-10l8-4m-8 4l-8 4m-8 4h16a2 2 0 002-2v-4a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+
+                <!-- Fleetyard -->
+                <a href="https://fleetyards.net/fleets/ifph/ships/?page=1" target="_blank"
+                    class="cta-button inline-flex items-center justify-center px-4 py-3 rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] shadow-xl font-semibold transition duration-300">
                     IFPH Fleetyard
                 </a>
-                <!-- Learn More Button -->
-                <a href="https://robertsspaceindustries.com/" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
-                    <!-- Reusing the Fleetyard Icon for a relevant space theme -->
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m0-10l8-4m-8 4l-8 4m-8 4h16a2 2 0 002-2v-4a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+
+                <!-- Learn More -->
+                <a href="https://robertsspaceindustries.com/" target="_blank"
+                    class="cta-button inline-flex items-center justify-center px-4 py-3 rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] shadow-xl font-semibold transition duration-300">
                     Learn More about SC
                 </a>
+
             </div>
         </div>
     </section>
+
 
     <!-- 2. Our Mission/Focus Section -->
     <section id="mission" class="py-20 bg-[#1D2429] border-t border-b border-[#FFB703]/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-16">
                 <h3 class="text-sm uppercase tracking-widest text-[#E1E1E1]">Our Charter</h3>
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">The Pillars of the Federation</h2>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">The Pillars of the Federation
+                </h2>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Aerospace Combat & Defense -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
                     <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Aerospace Combat & Defense</h4>
-                    <p class="text-[#E1E1E1]">We specialize in **Dogfighting, Attack Patrols, and Defensive Escort**. Join our ranks for organized fleet maneuvers and anti-piracy operations.</p>
+                    <p class="text-[#E1E1E1]">We specialize in **Dogfighting, Attack Patrols, and Defensive Escort**.
+                        Join our ranks for organized fleet maneuvers and anti-piracy operations.</p>
                 </div>
 
                 <!-- Logistics & Support (Icon Removed) -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
                     <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Logistics & Support</h4>
-                    <p class="text-[#E1E1E1]">Efficient and protected trade routes. We value expert haulers, salvagers, and miners who can sustain our operations on the frontier.</p>
+                    <p class="text-[#E1E1E1]">Efficient and protected trade routes. We value expert haulers, salvagers,
+                        and miners who can sustain our operations on the frontier.</p>
                 </div>
 
                 <!-- Brotherhood of the Stars (Icon Removed) -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
                     <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Brotherhood of the Stars</h4>
-                    <p class="text-[#E1E1E1]">A friendly, non-toxic environment focused on maturity and collaboration. We train together and fly for the success of the unit.</p>
+                    <p class="text-[#E1E1E1]">A friendly, non-toxic environment focused on maturity and collaboration.
+                        We train together and fly for the success of the unit.</p>
                 </div>
             </div>
         </div>
@@ -219,93 +299,98 @@
             <header class="text-center mb-12">
                 <!-- Updated Section Header -->
                 <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">Action Galleria</h2>
-                <p class="mt-2 text-[#E1E1E1]">Moments from the black: Screenshots of our fleet in combat, transit, and exploration.</p>
+                <p class="mt-2 text-[#E1E1E1]">Moments from the black: Screenshots of our fleet in combat, transit, and
+                    exploration.</p>
             </header>
-            
-            <!-- Discord Member Stat Card -->
+
+            <!-- Discord Member Stat Card
             <div class="bg-[#1D2429] p-4 rounded-xl shadow-2xl mb-8 flex items-center justify-center stat-card">
-                <svg class="w-8 h-8 mr-3 text-[#FFB703]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg class="w-8 h-8 mr-3 text-[#FFB703]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
                 <p class="text-xl font-semibold uppercase tracking-wider">
                     Total Discord Members: <span class="text-[#FFB703] text-3xl font-black ml-2">850+</span>
                 </p>
-            </div>
+            </div> -->
 
             <!-- Image Grid Gallery (Image Placeholders) -->
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                
-                <!-- Image Placeholder 1 -->
-                <a href="https://placehold.co/800x600/FFB703/1D2429?text=FLEET+ACTION+1" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/FFB703/1D2429?text=FLEET+ACTION+1" alt="Squadron in formation" class="gallery-image">
-                </a>
 
-                <!-- Image Placeholder 2 -->
-                <a href="https://placehold.co/800x600/70707D/1D2429?text=CAPITAL+SHIP+DEFENSE" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/70707D/1D2429?text=CAPITAL+SHIP+DEFENSE" alt="Capital ship defense" class="gallery-image">
-                </a>
+                <!-- Image 1 -->
+                <img src="media/ScreenShot-2025-10-17_14-35-57-B52.jpg" alt="Squadron in formation" class="gallery-image">
 
-                <!-- Image Placeholder 3 -->
-                <a href="https://placehold.co/800x600/E1E1E1/1D2429?text=EXPLORATION+SHOT" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/E1E1E1/1D2429?text=EXPLORATION+SHOT" alt="Exploration scene" class="gallery-image">
-                </a>
+                <!-- Image 2 -->
+                <img src="https://placehold.co/800x600/70707D/1D2429?text=CAPITAL+SHIP+DEFENSE"
+                    alt="Capital ship defense" class="gallery-image">
 
-                <!-- Image Placeholder 4 -->
-                <a href="https://placehold.co/800x600/F87171/1D2429?text=GROUND+OPERATION" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/F87171/1D2429?text=GROUND+OPERATION" alt="Ground troops preparing" class="gallery-image">
-                </a>
-                
-                <!-- Image Placeholder 5 -->
-                <a href="https://placehold.co/800x600/10B981/1D2429?text=JUMP+POINT" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/10B981/1D2429?text=JUMP+POINT" alt="Entering jump point" class="gallery-image">
-                </a>
-                
-                <!-- Image Placeholder 6 -->
-                <a href="https://placehold.co/800x600/4b5563/1D2429?text=MINING+OPERATION" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/4b5563/1D2429?text=MINING+OPERATION" alt="Mining operation" class="gallery-image">
-                </a>
-                
-                <!-- Image Placeholder 7 -->
-                <a href="https://placehold.co/800x600/93c5fd/1D2429?text=FORMATION+FLYING" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/93c5fd/1D2429?text=FORMATION+FLYING" alt="Tight ship formation" class="gallery-image">
-                </a>
-                
-                <!-- Image Placeholder 8 -->
-                <a href="https://placehold.co/800x600/d1d5db/1D2429?text=FLEET+IN+TRANSIT" target="_blank" class="block">
-                    <img src="https://placehold.co/800x600/d1d5db/1D2429?text=FLEET+IN+TRANSIT" alt="Ships in deep space transit" class="gallery-image">
-                </a>
-                
+                <!-- Image 3 -->
+                <img src="https://placehold.co/800x600/E1E1E1/1D2429?text=EXPLORATION+SHOT" alt="Exploration scene"
+                    class="gallery-image">
+
+                <!-- Image 4 -->
+                <img src="https://placehold.co/800x600/F87171/1D2429?text=GROUND+OPERATION"
+                    alt="Ground troops preparing" class="gallery-image">
+
+                <!-- Image 5 -->
+                <img src="https://placehold.co/800x600/10B981/1D2429?text=JUMP+POINT" alt="Entering jump point"
+                    class="gallery-image">
+
+                <!-- Image 6 -->
+                <img src="https://placehold.co/800x600/4b5563/1D2429?text=MINING+OPERATION" alt="Mining operation"
+                    class="gallery-image">
+
+                <!-- Image 7 -->
+                <img src="https://placehold.co/800x600/93c5fd/1D2429?text=FORMATION+FLYING" alt="Tight ship formation"
+                    class="gallery-image">
+
+                <!-- Image 8 -->
+                <img src="https://placehold.co/800x600/d1d5db/1D2429?text=FLEET+IN+TRANSIT"
+                    alt="Ships in deep space transit" class="gallery-image">
+
             </div>
+
 
             <!-- Fleetyards Link -->
             <div class="flex justify-center mt-8">
-                <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
+                <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank"
+                    class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
                     View Complete Stats on Fleetyards
                 </a>
             </div>
         </div>
     </section>
-    
+
     <!-- 4. Final CTA/Footer -->
     <footer class="bg-[#1D2429] py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
+
             <h3 class="text-3xl font-bold mb-4 text-[#E1E1E1]">Start Your Career in the 'Verse</h3>
-            <p class="mb-8 text-[#E1E1E1]">Click below to generate a randomized referral link for your starting bonus, then join our comms.</p>
+            <p class="mb-8 text-[#E1E1E1]">Click below to generate a randomized referral link for your starting bonus,
+                then join our comms.</p>
 
             <!-- Referral Code Section - Now directly links to RSI -->
             <div class="referral-box mt-8 max-w-xl mx-auto">
                 <p class="font-semibold mb-4 text-[#E1E1E1]">
-                    ✨ **Free 50,000 UEC Bonus!** Click below to automatically include a random organization referral code and claim your bonus.
+                    ✨ **Free 50,000 UEC Bonus!** Click below to automatically include a random organization referral
+                    code and claim your bonus.
                 </p>
-                <button onclick="generateRandomLink()" id="referralButton" class="cta-button inline-flex items-center justify-center px-6 py-3 border border-[#FFB703] text-base font-semibold rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none transition duration-300">
+                <button onclick="generateRandomLink()" id="referralButton"
+                    class="cta-button inline-flex items-center justify-center px-6 py-3 border border-[#FFB703] text-base font-semibold rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none transition duration-300">
                     Get Random Referral Link to RSI
                 </button>
                 <p id="codeResult" class="mt-4 hidden text-sm text-[#E1E1E1]">
                     Redirecting you now...
                 </p>
             </div>
-            
+
             <p class="text-[#E1E1E1] mt-6 text-sm">
-                Already have a game package? <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="text-[#FFB703] hover:text-[#CC9202] font-semibold underline">Join our Discord directly.</a>
+                Already have a game package? <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank"
+                    class="text-[#FFB703] hover:text-[#CC9202] font-semibold underline">Join our Discord directly.</a>
             </p>
         </div>
     </footer>
@@ -320,7 +405,7 @@
             "STAR-KN4W-PQRT", "STAR-T2XQ-XW3C", "STAR-6VJN-Q4LH",
             "STAR-T2TZ-QPVC", "STAR-RV3D-VVVK", "STAR-SD2Y-T292",
             "STAR-HTNY-T4QL", "STAR-95VX-DSKD", "STAR-B6NP-C3L5",
-            "STAR-FPCK-7RXB", "STAR-6PCL-7DNB"
+            "STAR-FPCK-7RXB", "STAR-6PCL-7DNB", ""
         ];
 
         function generateRandomLink() {
@@ -339,7 +424,7 @@
 
             setTimeout(() => {
                 window.open(fullLink, '_blank');
-                
+
                 buttonElement.textContent = "Get Random Referral Link to RSI";
                 buttonElement.disabled = false;
                 buttonElement.classList.add('bg-[#FFB703]', 'hover:bg-[#CC9202]');
@@ -357,7 +442,7 @@
 
         // SVG Path for Play Icon (Circle + Triangle)
         const PLAY_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
-        
+
         // SVG Path for Pause Icon (Circle + Lines)
         const PAUSE_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
 
@@ -368,7 +453,7 @@
         });
 
         if (audioToggle) {
-             audioToggle.addEventListener('click', () => {
+            audioToggle.addEventListener('click', () => {
                 if (audio.paused) {
                     if (audio.readyState >= 3) {
                         audio.play().then(() => {
@@ -389,9 +474,17 @@
             });
             audioIcon.innerHTML = PLAY_ICON_SVG;
         } else {
-             console.log("Audio toggle button not found, audio features remain inactive.");
+            console.log("Audio toggle button not found, audio features remain inactive.");
         }
-    </script>
 
+        document.addEventListener("click", () => {
+            const audio = document.getElementById("background-audio");
+            if (audio.muted) {
+                audio.muted = false;
+                audio.play().catch(e => console.log("Unmute failed:", e));
+            }
+        });
+    </script>
 </body>
+
 </html>
