@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | IFPH</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js Library for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <style>
         /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
         /* Primary Text: #E1E1E1 (Light Silver) */
@@ -28,7 +30,8 @@
         /* Hero Section Styling */
         .hero-bg {
             /* PATH CHANGED TO LOOK FOR .JPG EXTENSION */
-            background-image: url('hero-bg.jpg');
+            /* NOTE: This will appear as a broken image in the preview */
+            background-image: url('https://placehold.co/1200x800/293438/E1E1E1?text=SPACE+BACKGROUND+PLACEHOLDER'); 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -94,6 +97,12 @@
             border-radius: 0.25rem;
             border: 1px dashed #FFB703;
         }
+        /* Style for the new Member Stat Card */
+        .stat-card {
+            background-color: #1D2429; 
+            border: 1px solid #FFB703;
+            color: #E1E1E1;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -101,25 +110,44 @@
     <!-- Navigation Bar (Simple, Fixed) -->
     <header class="bg-[#1D2429] bg-opacity-90 sticky top-0 z-50 shadow-lg border-b border-[#FFB703]/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Organization Short Name -->
+            <!-- Left Side: Logo/Title -->
             <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#E1E1E1] tracking-wider text-[#E1E1E1]">
                 IFPH
             </h1>
-            <div class="space-x-4 flex">
-                <a href="#hero" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
-                <a href="#mission" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
-                <a href="#requirements" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Specs</a>
+            
+            <!-- Right Side: Navigation Links & Audio Button -->
+            <div class="flex items-center space-x-4">
+                <a href="#hero" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
+                <a href="#mission" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
+                <a href="#fleet" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
+                
+                <!-- NEW: Ambient Sound Toggle Button - Uses Play icon as default -->
+                <button id="audio-toggle" class="p-2 rounded-full bg-[#FFB703] text-[#1D2429] hover:bg-[#CC9202] transition duration-150 focus:outline-none" title="Toggle Ambient Sound">
+                    <svg id="audio-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Default Icon: Play Button -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
             </div>
         </nav>
 
     </header>
+
+    <!-- HIDDEN AUDIO PLAYER -->
+    <audio id="background-audio" loop>
+        <!-- FINAL PUBLIC LINK TO YOUR UPLOADED MP3 -->
+        <source src="/IFPHrp/audio/GalacticCommandOverture_FULL_SONG_MusicGPT.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- 1. Hero Section: The Call to Action -->
     <section id="hero" class="hero-bg h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <div class="z-10 max-w-4xl space-y-8">
-             <!-- Centered Logo Above Text -->
-        <div class="flex justify-center mb-4">
-            <img src="Philippines-ArmadaIFPH_11_Logo.png" alt="IFPH Logo" class="h-48 w-auto">
-        </div>
+            <!-- Centered Logo Above Text (Using placeholder for preview) -->
+            <div class="flex justify-center mb-4">
+                <img src="https://placehold.co/100x100/1D2429/FFB703?text=LOGO" alt="IFPH Logo" class="h-48 w-auto">
+            </div>
             <p class="uppercase tracking-widest text-sm sm:text-base text-[#E1E1E1]">OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN</p>
             <h2 class="text-5xl sm:text-7xl font-black leading-tight shadow-text text-[#FFB703]">
                 INTERGALACTIC FEDERATION OF THE PHILIPPINE
@@ -127,24 +155,24 @@
             <p class="text-lg sm:text-xl max-w-2xl mx-auto text-[#E1E1E1]">
                 Working together, the federation’s integrated approach leverages our combined heritage and advanced work on individual job elements of the INTERGALACTIC SPACE FEDERATION of the PHILIPPINES
             </p>
-            <!-- CTA Buttons (Discord, Facebook, and Fleetyard) -->
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 pt-4">
+            <!-- CTA Buttons (Discord, Fleetyard, and Learn More) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 max-w-5xl mx-auto">
                 <!-- Discord Button -->
-                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="cta-button flex-1 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
+                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Join Our Discord
                 </a>
-                <!-- Facebook Button -->
-                <a href="https://www.facebook.com/groups/StarCitizenPH" target="_blank" class="cta-button flex-1 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
-                    <!-- Simple Facebook Icon (f) -->
-                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0H5C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h7.62V14.4H10v-3.2h2.62V9.4c0-2.3 1.4-3.6 3.5-3.6 1.05 0 2.12.2 2.12.2V7.5h-1.35c-1.1 0-1.32.7-1.32 1.34v1.86h2.62l-.42 3.2h-2.2V24H19c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5z"/></svg>
-                    Join Our Facebook Group
-                </a>
                 <!-- Fleetyard Button -->
-                <a href="https://fleetyards.net/fleets/ifph/ships/?page=1" target="_blank" class="cta-button flex-1 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
+                <a href="https://fleetyards.net/fleets/ifph/ships/?page=1" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
                     <!-- Custom SVG Icon for Ships/Fleetyard -->
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m0-10l8-4m-8 4l-8 4m-8 4h16a2 2 0 002-2v-4a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
                     IFPH Fleetyard
+                </a>
+                <!-- Learn More Button -->
+                <a href="https://robertsspaceindustries.com/" target="_blank" class="cta-button inline-flex items-center justify-center px-4 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
+                    <!-- Reusing the Fleetyard Icon for a relevant space theme -->
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10m0-10l8-4m-8 4l-8 4m-8 4h16a2 2 0 002-2v-4a2 2 0 00-2-2H4a2 2 0 00-2 2v4a2 2 0 002 2z"></path></svg>
+                    Learn More about SC
                 </a>
             </div>
         </div>
@@ -180,63 +208,47 @@
         </div>
     </section>
 
-    <!-- 3. PC Requirements Section -->
-    <section id="requirements" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- 3. Fleet Stats Section (Interactive Chart Dashboard) -->
+    <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">System Readiness</h2>
-                <p class="mt-2 text-[#E1E1E1]">Star Citizen is demanding. Ensure your rig is ready for the 'Verse.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Composition</h2>
+                <p class="mt-2 text-[#E1E1E1]">A detailed look at the types and numbers of ships within the organization's roster.</p>
             </header>
-
-            <div class="overflow-x-auto rounded-xl shadow-2xl">
-                <table class="min-w-full divide-y divide-[#70707D]">
-                    <thead>
-                        <tr>
-                            <!-- Header row uses darkest color and white text -->
-                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider req-header rounded-tl-xl">Component</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header">Minimum (Playable)</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header rounded-tr-xl">Recommended (Smooth)</th>
-                        </tr>
-                    </thead>
-                    <!-- Body uses alternating dark/darker backgrounds and all white text -->
-                    <tbody class="divide-y divide-gray-700 text-sm text-white">
-                        <!-- OS -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Operating System</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 (64-bit)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 / 11 (64-bit)</td>
-                        </tr>
-                        <!-- CPU -->
-                        <tr class="req-table-dark">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Processor (CPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad-Core CPU (Intel i7 or AMD Bulldozer/Ryzen 5)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad/Eight-Core, High Clock Speed (i7 or Ryzen 7 class)</td>
-                        </tr>
-                        <!-- RAM -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Memory (RAM)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F9744B]">16 GB (Bare Minimum)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">32 GB+ (Highly Recommended)</td>
-                        </tr>
-                        <!-- GPU -->
-                        <tr class="req-table-dark">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Graphics Card (GPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 11 compatible with 4 GB VRAM</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 12 compatible with 8 GB+ VRAM (e.g., RTX 3060 / RX 6700 XT)</td>
-                        </tr>
-                        <!-- Storage -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Storage</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F87171]">SSD Required (100GB+ free space)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">NVMe SSD (For best performance)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             
-            <p class="text-center text-sm text-[#E1E1E1] mt-6">
-                <span class="font-bold text-[#FFB703]">IMPORTANT:</span> The game is in active development and performance varies. **An SSD and 32GB of RAM are strongly advised for a stable experience.**
-            </p>
+            <!-- NEW: Discord Member Stat Card -->
+            <div class="bg-[#1D2429] p-4 rounded-xl shadow-2xl mb-8 flex items-center justify-center stat-card">
+                <svg class="w-8 h-8 mr-3 text-[#FFB703]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p class="text-xl font-semibold uppercase tracking-wider">
+                    Total Discord Members: <span class="text-[#FFB703] text-3xl font-black ml-2">850+</span>
+                </p>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Chart 1: Ships by Classification (Doughnut) -->
+                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-1" style="height: 350px;">
+                    <canvas id="classificationChart"></canvas>
+                </div>
+
+                <!-- Chart 2: Ships by Size (Doughnut) -->
+                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-1" style="height: 350px;">
+                    <canvas id="sizeChart"></canvas>
+                </div>
+
+                <!-- Chart 3: Top 10 Ship Models (Bar/Horizontal) -->
+                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-3" style="height: 450px;">
+                    <canvas id="topModelsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Fleetyards Link -->
+            <div class="flex justify-center mt-8">
+                <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
+                    View Complete Stats on Fleetyards
+                </a>
+            </div>
         </div>
     </section>
     
@@ -266,21 +278,105 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Random Code Selection and Link Generation -->
+    <!-- JavaScript for Charts and Random Link -->
     <script>
-        // Array of all available referral codes
+        // --- DATA SETUP (Update these objects to reflect real stats) ---
+        const CHART_COLORS = [
+            '#FFB703', '#70707D', '#E1E1E1', '#F87171', '#10B981', '#4b5563', '#93c5fd', '#d1d5db', '#1f2937'
+        ];
+
+        // 1. Ships by Classification
+        const classificationData = {
+            labels: ['Fighter', 'Support', 'Heavy Combat', 'Transport', 'Exploration', 'Industrial'],
+            datasets: [{
+                data: [40, 18, 12, 15, 8, 7], // Total percentage = 100
+                backgroundColor: [CHART_COLORS[0], CHART_COLORS[1], CHART_COLORS[3], CHART_COLORS[4], CHART_COLORS[5], CHART_COLORS[6]],
+                hoverOffset: 12,
+            }]
+        };
+
+        // 2. Ships by Size
+        const sizeData = {
+            labels: ['Small (S)', 'Medium (M)', 'Large (L)', 'Capital (XL)'],
+            datasets: [{
+                data: [55, 30, 10, 5],
+                backgroundColor: [CHART_COLORS[0], CHART_COLORS[3], CHART_COLORS[4], CHART_COLORS[1]],
+                hoverOffset: 12,
+            }]
+        };
+
+        // 3. Top 10 Ship Models (Horizontal Bar Chart)
+        const topModelsData = {
+            labels: ['Aurora MR', 'Arrow', 'Cutlass Black', 'C8 Pisces', 'Mantis', 'Hammerhead', 'Carrack', 'Prospector', 'Mole', 'Ares Inferno'],
+            datasets: [{
+                label: 'Ship Count',
+                data: [15, 12, 10, 9, 8, 5, 4, 3, 2, 2],
+                backgroundColor: CHART_COLORS[0],
+                borderColor: CHART_COLORS[0],
+                borderWidth: 1,
+            }]
+        };
+
+        // --- CHART CONFIGURATION UTILITY ---
+        function getChartConfig(type, data, title) {
+            return {
+                type: type,
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: type === 'bar' ? 'y' : 'x', // Horizontal bar chart
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#E1E1E1',
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: title,
+                            color: '#FFB703',
+                            font: { size: 16, weight: 'bold', family: 'Rajdhani' }
+                        }
+                    },
+                    scales: type !== 'doughnut' ? { // Only apply scales to bar charts
+                        y: {
+                            ticks: { color: '#70707D' },
+                            grid: { color: 'rgba(112, 112, 125, 0.2)' }
+                        },
+                        x: {
+                            ticks: { color: '#70707D' },
+                            grid: { color: 'rgba(112, 112, 125, 0.2)' }
+                        }
+                    } : {}
+                }
+            };
+        }
+
+        // --- CHART INITIALIZATION ---
+        window.onload = function() {
+            // 1. Classification Chart
+            new Chart(document.getElementById('classificationChart'), getChartConfig('doughnut', classificationData, 'Ships by Classification'));
+            
+            // 2. Size Chart
+            new Chart(document.getElementById('sizeChart'), getChartConfig('doughnut', sizeData, 'Ships by Size'));
+
+            // 3. Top Models Chart
+            new Chart(document.getElementById('topModelsChart'), getChartConfig('bar', topModelsData, 'Top 10 Ship Models (Count)'));
+        };
+
+        // --- RANDOM REFERRAL LINK FUNCTION (Kept for completeness) ---
         const referralCodes = [
             "STAR-YPF4-XNG9", "STAR-HG52-DCDT", "STAR-52Y6-6GQL",
             "STAR-SYX5-FPH2", "STAR-TGR9-GTLF", "STAR-MHR4-H297",
             "STAR-V77G-4YNY", "STAR-RZB2-2VJQ", "STAR-63FV-NQFB",
             "STAR-KN4W-PQRT", "STAR-T2XQ-XW3C", "STAR-6VJN-Q4LH",
             "STAR-T2TZ-QPVC", "STAR-RV3D-VVVK", "STAR-SD2Y-T292",
-            "STAR-HTNY-T4QL", "STAR-95VX-DSKD", "STAR-B6NP-C3L5"
+            "STAR-HTNY-T4QL", "STAR-95VX-DSKD", "STAR-B6NP-C3L5",
             "STAR-FPCK-7RXB", "STAR-6PCL-7DNB"
         ];
 
         function generateRandomLink() {
-            // 1. Disable button and show message
             const buttonElement = document.getElementById('referralButton');
             const resultElement = document.getElementById('codeResult');
             buttonElement.textContent = "Generating Link...";
@@ -289,27 +385,68 @@
             buttonElement.classList.add('bg-gray-500');
             resultElement.classList.remove('hidden');
 
-            // 2. Select a random code
             const randomIndex = Math.floor(Math.random() * referralCodes.length);
             const randomCode = referralCodes[randomIndex];
-
-            // 3. Build the full RSI referral URL
             const baseUrl = "https://robertsspaceindustries.com/enlist?referral=";
             const fullLink = baseUrl + randomCode;
 
-            // 4. Redirect the user after a short delay for visual confirmation
             setTimeout(() => {
                 window.open(fullLink, '_blank');
                 
-                // Reset the UI 
                 buttonElement.textContent = "Get Random Referral Link to RSI";
                 buttonElement.disabled = false;
                 buttonElement.classList.add('bg-[#FFB703]', 'hover:bg-[#CC9202]');
                 buttonElement.classList.remove('bg-gray-500');
                 resultElement.classList.add('hidden');
 
-            }, 500); // 0.5 second delay
+            }, 500);
         }
+
+        // --- AUDIO TOGGLE LOGIC ---
+        const audio = document.getElementById('background-audio');
+        const audioToggle = document.getElementById('audio-toggle');
+        const audioIcon = document.getElementById('audio-icon');
+
+        // SVG Path for Play Icon (Circle + Triangle)
+        const PLAY_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+        
+        // SVG Path for Pause Icon (Circle + Lines)
+        const PAUSE_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+
+
+        // New Logic: Check if audio is ready before attempting playback
+        audio.addEventListener('canplaythrough', () => {
+            console.log("Audio file fully loaded and ready to play.");
+            // No action needed here, just logging the success
+        });
+
+        audioToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                // Try to play audio
+                // Check if the file is loaded (readyState 4 means the file is loaded enough to play all the way through)
+                if (audio.readyState >= 3) {
+                    audio.play().then(() => {
+                        // Success: Change icon to Pause
+                        audioIcon.innerHTML = PAUSE_ICON_SVG;
+                        audioToggle.title = 'Ambient Sound Paused';
+                    }).catch(error => {
+                        // Fail (e.g., sound still blocked): Keep icon as Play
+                        console.warn("Audio playback failed, user interaction needed.", error);
+                        audioIcon.innerHTML = PLAY_ICON_SVG;
+                    });
+                } else {
+                    console.warn("Audio not yet ready. Please wait.");
+                }
+            } else {
+                // Pause audio and change icon back to Play
+                audio.pause();
+                audioIcon.innerHTML = PLAY_ICON_SVG;
+                audioToggle.title = 'Ambient Sound Play';
+            }
+        });
+
+        // Ensure the initial icon state is set correctly (Play)
+        audioIcon.innerHTML = PLAY_ICON_SVG;
     </script>
 
 </body>
