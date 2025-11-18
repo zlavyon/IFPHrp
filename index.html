@@ -110,19 +110,34 @@
     <!-- Navigation Bar (Simple, Fixed) -->
     <header class="bg-[#1D2429] bg-opacity-90 sticky top-0 z-50 shadow-lg border-b border-[#FFB703]/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Organization Short Name -->
+            <!-- Left Side: Logo/Title -->
             <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#E1E1E1] tracking-wider text-[#E1E1E1]">
                 IFPH
             </h1>
-            <div class="space-x-4 flex">
-                <a href="#hero" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
-                <a href="#mission" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
-                <!-- UPDATED NAV LINK -->
-                <a href="#fleet" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
+            
+            <!-- Right Side: Navigation Links & Audio Button -->
+            <div class="flex items-center space-x-4">
+                <a href="#hero" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
+                <a href="#mission" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
+                <a href="#fleet" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
+                
+                <!-- NEW: Ambient Sound Toggle Button -->
+                <button id="audio-toggle" class="p-2 rounded-full bg-[#FFB703] text-[#1D2429] hover:bg-[#CC9202] transition duration-150 focus:outline-none" title="Toggle Ambient Sound">
+                    <!-- Speaker Off Icon (Default State) -->
+                    <svg id="audio-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 10a7.25 7.25 0 00-14.5 0v4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zM7 12h.01"></path></svg>
+                </button>
             </div>
         </nav>
 
     </header>
+
+    <!-- HIDDEN AUDIO PLAYER -->
+    <audio id="background-audio" loop>
+        <!-- FINAL PUBLIC LINK TO YOUR UPLOADED MP3 -->
+        <source src="https://zlavyon.github.io/IFPHrp/audio/GalacticCommandOverture_FULL_SONG_MusicGPT.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
     <!-- 1. Hero Section: The Call to Action -->
     <section id="hero" class="hero-bg h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <div class="z-10 max-w-4xl space-y-8">
@@ -388,6 +403,30 @@
 
             }, 500);
         }
+
+        // --- AUDIO TOGGLE LOGIC ---
+        const audio = document.getElementById('background-audio');
+        const audioToggle = document.getElementById('audio-toggle');
+        const audioIcon = document.getElementById('audio-icon');
+
+        audioToggle.addEventListener('click', () => {
+            if (audio.paused) {
+                // Try to play audio
+                audio.play().then(() => {
+                    // Success: Change icon to Speaker On
+                    audioIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464A9 9 0 0121 12a9 9 0 01-5.464 3.536M7 12H3m4 0v-2m0 2v2m0 2.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9z"></path>';
+                    audioToggle.title = 'Ambient Sound On';
+                }).catch(error => {
+                    // Fail (e.g., sound still blocked): Log error, keep icon Off
+                    console.error("Audio playback failed. User may need to click outside of this element first.", error);
+                });
+            } else {
+                // Pause audio and change icon to Speaker Off
+                audio.pause();
+                audioIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 10a7.25 7.25 0 00-14.5 0v4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zM7 12h.01"></path>';
+                audioToggle.title = 'Ambient Sound Off';
+            }
+        });
     </script>
 
 </body>
