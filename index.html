@@ -109,8 +109,8 @@
             <div class="space-x-4 flex">
                 <a href="#hero" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
                 <a href="#mission" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
-                <!-- UPDATED NAV LINK -->
-                <a href="#fleet" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
+                <!-- REVERTED NAV LINK -->
+                <a href="#requirements" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Specs</a>
             </div>
         </nav>
 
@@ -182,51 +182,63 @@
         </div>
     </section>
 
-    <!-- 3. Fleet Stats Section (Live Fleetyards API Data) -->
-    <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
+    <!-- 3. PC Requirements Section (Reverted to Specs) -->
+    <section id="requirements" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">Live Fleet Stats</h2>
-                <p class="mt-2 text-[#E1E1E1]">Real-time statistics fetched directly from the IFPH Fleetyards API.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">System Readiness</h2>
+                <p class="mt-2 text-[#E1E1E1]">Star Citizen is demanding. Ensure your rig is ready for the 'Verse.</p>
             </header>
+
+            <div class="overflow-x-auto rounded-xl shadow-2xl">
+                <table class="min-w-full divide-y divide-[#70707D]">
+                    <thead>
+                        <tr>
+                            <!-- Header row uses darkest color and white text -->
+                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider req-header rounded-tl-xl">Component</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header">Minimum (Playable)</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header rounded-tr-xl">Recommended (Smooth)</th>
+                        </tr>
+                    </thead>
+                    <!-- Body uses alternating dark/darker backgrounds and all white text -->
+                    <tbody class="divide-y divide-gray-700 text-sm text-white">
+                        <!-- OS -->
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Operating System</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 (64-bit)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 / 11 (64-bit)</td>
+                        </tr>
+                        <!-- CPU -->
+                        <tr class="req-table-dark">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Processor (CPU)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad-Core CPU (Intel i7 or AMD Bulldozer/Ryzen 5)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad/Eight-Core, High Clock Speed (i7 or Ryzen 7 class)</td>
+                        </tr>
+                        <!-- RAM -->
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Memory (RAM)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F9744B]">16 GB (Bare Minimum)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">32 GB+ (Highly Recommended)</td>
+                        </tr>
+                        <!-- GPU -->
+                        <tr class="req-table-dark">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Graphics Card (GPU)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 11 compatible with 4 GB VRAM</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 12 compatible with 8 GB+ VRAM (e.g., RTX 3060 / RX 6700 XT)</td>
+                        </tr>
+                        <!-- Storage -->
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Storage</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F87171]">SSD Required (100GB+ free space)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">NVMe SSD (For best performance)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
-            <!-- Live Data Display Panel -->
-            <div id="fleet-stats-display" class="bg-[#1D2429] p-6 rounded-xl shadow-2xl">
-                
-                <!-- Loading State / Error State -->
-                <div id="loading-state" class="text-center py-8 text-[#FFB703]">
-                    <p class="text-xl font-semibold">Fetching Live Fleet Data...</p>
-                    <p class="text-sm mt-2">Connecting to Fleetyards API...</p>
-                </div>
-
-                <!-- Metrics will be injected here -->
-                <div id="metrics-container" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                    
-                    <div class="p-4 border border-[#70707D] rounded-lg">
-                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Total Ships</p>
-                        <p id="total-ships" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
-                    </div>
-                    
-                    <div class="p-4 border border-[#70707D] rounded-lg">
-                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Estimated Value</p>
-                        <p id="total-value" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
-                    </div>
-                    
-                    <div class="p-4 border border-[#70707D] rounded-lg">
-                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Ships of Interest</p>
-                        <p id="ships-of-interest" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Fleetyards Link -->
-            <div class="flex justify-center mt-8">
-                <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
-                    View Detailed Fleet Stats on Fleetyards
-                </a>
-            </div>
+            <p class="text-center text-sm text-[#E1E1E1] mt-6">
+                <span class="font-bold text-[#FFB703]">IMPORTANT:</span> The game is in active development and performance varies. **An SSD and 32GB of RAM are strongly advised for a stable experience.**
+            </p>
         </div>
     </section>
     
@@ -258,59 +270,6 @@
 
     <!-- JavaScript for Live Data Fetching and Random Link -->
     <script>
-        const FLEET_SLUG = 'ifph'; // Your Fleetyards Organization Slug
-        const API_URL = `https://fleetyards.net/api/v1/fleets/${FLEET_SLUG}/stats/`;
-
-        // Utility function to format numbers for readability (e.g., 123,456.00)
-        const formatter = new Intl.NumberFormat('en-US', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
-
-        // Function to fetch and display live fleet data
-        async function fetchFleetStats() {
-            const loadingState = document.getElementById('loading-state');
-            const metricsContainer = document.getElementById('metrics-container');
-            
-            try {
-                const response = await fetch(API_URL);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                // --- Data Processing and Display ---
-                
-                // Format total estimated value (assuming this comes in USD or similar)
-                const totalValue = data.total_estimated_value 
-                    ? `$${formatter.format(data.total_estimated_value)}`
-                    : 'N/A';
-                
-                // Display the main metrics
-                document.getElementById('total-ships').textContent = formatter.format(data.total_ships);
-                document.getElementById('total-value').textContent = totalValue;
-                
-                // Fleetyards API often returns metrics like 'total_fleet_cap', using a fallback for "Ships of Interest"
-                const specialMetric = data.total_fleet_cap || data.total_fleet_mass || 'N/A';
-                document.getElementById('ships-of-interest').textContent = formatter.format(specialMetric);
-
-                // Show the metrics and hide loading
-                loadingState.classList.add('hidden');
-                metricsContainer.classList.remove('hidden');
-
-            } catch (error) {
-                console.error("Could not fetch Fleetyards stats:", error);
-                
-                // Display error message
-                loadingState.innerHTML = `<p class="text-xl font-semibold text-red-500">Error: Could not load live data.</p>
-                                          <p class="text-sm mt-2 text-[#E1E1E1]">The Fleetyards API may be temporarily unavailable or the organization slug is incorrect.</p>`;
-                loadingState.classList.remove('hidden');
-                metricsContainer.classList.add('hidden');
-            }
-        }
-        
         // --- RANDOM REFERRAL LINK FUNCTION (Kept for completeness) ---
         const referralCodes = [
             "STAR-YPF4-XNG9", "STAR-HG52-DCDT", "STAR-52Y6-6GQL",
@@ -347,8 +306,7 @@
             }, 500);
         }
 
-        // Initialize the fetch when the page loads
-        window.onload = fetchFleetStats;
+        // Removed window.onload = fetchFleetStats;
     </script>
 
 </body>
