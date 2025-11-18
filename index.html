@@ -121,10 +121,13 @@
                 <a href="#mission" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
                 <a href="#fleet" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
                 
-                <!-- NEW: Ambient Sound Toggle Button -->
+                <!-- NEW: Ambient Sound Toggle Button - Uses Play icon as default -->
                 <button id="audio-toggle" class="p-2 rounded-full bg-[#FFB703] text-[#1D2429] hover:bg-[#CC9202] transition duration-150 focus:outline-none" title="Toggle Ambient Sound">
-                    <!-- Speaker Off Icon (Default State) -->
-                    <svg id="audio-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 10a7.25 7.25 0 00-14.5 0v4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zM7 12h.01"></path></svg>
+                    <svg id="audio-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Default Icon: Play Button -->
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                 </button>
             </div>
         </nav>
@@ -409,24 +412,35 @@
         const audioToggle = document.getElementById('audio-toggle');
         const audioIcon = document.getElementById('audio-icon');
 
+        // SVG Path for Play Icon (Circle + Triangle)
+        const PLAY_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+        
+        // SVG Path for Pause Icon (Circle + Lines)
+        const PAUSE_ICON_SVG = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>';
+
+
         audioToggle.addEventListener('click', () => {
             if (audio.paused) {
                 // Try to play audio
                 audio.play().then(() => {
-                    // Success: Change icon to Speaker On
-                    audioIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464A9 9 0 0121 12a9 9 0 01-5.464 3.536M7 12H3m4 0v-2m0 2v2m0 2.5a4.5 4.5 0 100-9 4.5 4.5 0 000 9z"></path>';
-                    audioToggle.title = 'Ambient Sound On';
+                    // Success: Change icon to Pause
+                    audioIcon.innerHTML = PAUSE_ICON_SVG;
+                    audioToggle.title = 'Ambient Sound Paused';
                 }).catch(error => {
-                    // Fail (e.g., sound still blocked): Log error, keep icon Off
-                    console.error("Audio playback failed. User may need to click outside of this element first.", error);
+                    // Fail (e.g., sound still blocked): Keep icon as Play
+                    console.warn("Audio playback failed. User interaction may be required outside of this element.");
+                    audioIcon.innerHTML = PLAY_ICON_SVG;
                 });
             } else {
-                // Pause audio and change icon to Speaker Off
+                // Pause audio and change icon back to Play
                 audio.pause();
-                audioIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 10a7.25 7.25 0 00-14.5 0v4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0zM7 12h.01"></path>';
-                audioToggle.title = 'Ambient Sound Off';
+                audioIcon.innerHTML = PLAY_ICON_SVG;
+                audioToggle.title = 'Ambient Sound Play';
             }
         });
+
+        // Ensure the initial icon state is set correctly (Play)
+        audioIcon.innerHTML = PLAY_ICON_SVG;
     </script>
 
 </body>
