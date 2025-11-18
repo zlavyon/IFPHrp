@@ -6,13 +6,20 @@
     <title>Recruitment | IFPH</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Fonts and Global Styles */
+        /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
+        /* Primary Text: #E1E1E1 (Light Silver) */
+        /* Accent/CTA/Title: #FFB703 (Vivid Gold-Orange) */
+        /* Card/Footer Background: #1D2429 (Charcoal Blue-Black) */
+        
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            color: #e5e7eb;
+            /* APPLIED SUBTLE VERTICAL GRADIENT */
+            background: linear-gradient(to bottom, #293438 0%, #0F1314 100%);
+            background-attachment: fixed; /* Ensures gradient covers the entire viewport */
+            min-height: 100vh; /* Ensures body covers full screen height */
+            color: #E1E1E1; /* New Default Text Color (Silver) */
         }
         h1, h2, h3, h4 {
             font-family: 'Rajdhani', sans-serif;
@@ -33,14 +40,15 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(180deg, rgba(13, 17, 23, 0.8) 0%, rgba(13, 17, 23, 0.5) 50%, rgba(13, 17, 23, 0.8) 100%);
+            /* Dark transparent overlay matching gradient colors for readability */
+            background: linear-gradient(180deg, rgba(41, 52, 56, 0.8) 0%, rgba(41, 52, 56, 0.5) 50%, rgba(15, 19, 20, 0.8) 100%);
         }
         .section-header::after {
             content: '';
             display: block;
             width: 80px;
             height: 3px;
-            background-color: #3b82f6;
+            background-color: #FFB703; /* Gold-Orange Accent */
             margin-top: 10px;
             border-radius: 9999px;
         }
@@ -49,52 +57,58 @@
         }
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.5); /* Gold-Orange Shadow */
         }
+        /* Table Styles (using darkest palette colors for required white text contrast) */
         .req-header {
-            background-color: #1f2937;
-            color: #93c5fd;
+            background-color: #1D2429; /* Charcoal Blue-Black */
+            color: white; 
         }
+        .req-table-dark {
+            background-color: #1D2429; /* Charcoal Blue-Black */
+        }
+        .req-table-light {
+             background-color: #293438; /* Slightly lighter Charcoal */
+        }
+        /* Card Styling */
         .focus-card {
-            background-color: #1f2937;
-            border: 1px solid #374151;
+            background-color: #1D2429; /* Charcoal Blue-Black */
+            border: 1px solid #70707D; /* Dark Grey border */
             transition: border-color 0.3s, transform 0.3s;
         }
         .focus-card:hover {
-            border-color: #3b82f6;
+            border-color: #FFB703; /* Gold-Orange Accent */
             transform: scale(1.02);
         }
         /* Referral Code Box Styles */
         .referral-box {
-            background-color: #1f2937;
-            border: 1px solid #374151;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            background-color: #1D2429; 
+            border: 1px solid #70707D;
         }
         .code-display {
-            background-color: #0f172a;
-            color: #10b981; /* Green color for code */
+            background-color: #293438; /* Darker background for code */
+            color: #E1E1E1; /* Light Silver text for contrast */
             font-family: 'Rajdhani', monospace;
             font-size: 1.5rem;
             padding: 0.5rem;
             border-radius: 0.25rem;
-            border: 1px dashed #374151;
+            border: 1px dashed #FFB703;
         }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Navigation Bar (Simple, Fixed) -->
-    <header class="bg-gray-900 bg-opacity-90 sticky top-0 z-50 shadow-lg border-b border-blue-900/50">
+    <header class="bg-[#1D2429] bg-opacity-90 sticky top-0 z-50 shadow-lg border-b border-[#FFB703]/50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Organization Short Name (Now without logo code) -->
-            <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 tracking-wider">
+            <!-- Organization Short Name -->
+            <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFB703] to-[#E1E1E1] tracking-wider text-[#E1E1E1]">
                 IFPH
             </h1>
             <div class="space-x-4 flex">
-                <a href="#hero" class="text-sm font-medium hover:text-blue-400 transition duration-150">Home</a>
-                <a href="#mission" class="text-sm font-medium hover:text-blue-400 transition duration-150">Our Mission</a>
-                <a href="#requirements" class="text-sm font-medium hover:text-blue-400 transition duration-150">Specs</a>
+                <a href="#hero" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
+                <a href="#mission" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
+                <a href="#requirements" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Specs</a>
             </div>
         </nav>
     </header>
@@ -102,15 +116,15 @@
     <!-- 1. Hero Section: The Call to Action -->
     <section id="hero" class="hero-bg h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <div class="z-10 max-w-4xl space-y-8">
-            <p class="text-blue-400 uppercase tracking-widest text-sm sm:text-base">OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN</p>
-            <h2 class="text-5xl sm:text-7xl font-black leading-tight text-white shadow-text">
+            <p class="uppercase tracking-widest text-sm sm:text-base text-[#E1E1E1]">OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN</p>
+            <h2 class="text-5xl sm:text-7xl font-black leading-tight shadow-text text-[#FFB703]">
                 INTERGALACTIC FEDERATION OF THE PHILIPPINE
             </h2>
-            <p class="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto">
+            <p class="text-lg sm:text-xl max-w-2xl mx-auto text-[#E1E1E1]">
                 Working together, the federation’s integrated approach leverages our combined heritage and advanced work on individual job elements of the INTERGALACTIC SPACE FEDERATION of the PHILIPPINES
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 pt-4">
-                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+                <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FFB703] transition duration-300">
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Join Our Discord
                 </a>
@@ -119,118 +133,117 @@
     </section>
 
     <!-- 2. Our Mission/Focus Section -->
-    <section id="mission" class="py-20 bg-gray-900 border-t border-b border-blue-900/30">
+    <section id="mission" class="py-20 bg-[#1D2429] border-t border-b border-[#FFB703]/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-16">
-                <h3 class="text-sm uppercase tracking-widest text-blue-400">Our Charter</h3>
-                <h2 class="text-4xl font-bold text-white section-header inline-block">The Pillars of the Federation</h2>
+                <h3 class="text-sm uppercase tracking-widest text-[#E1E1E1]">Our Charter</h3>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">The Pillars of the Federation</h2>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Tactical Security (Ammo Icon) -->
+                <!-- Tactical Security (Icon Removed) -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
-                    <svg class="w-12 h-12 text-blue-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10m0 0h2m-2 0h-2m2-10h4m-4 0v10m-4-10h4m-4 0v-4m4 4v4m0-4h4m-4 0v-4m4 4v4m0-4h4m-4 0v-4m4 4v4"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <h4 class="text-xl font-semibold mb-3 text-white">Tactical Security</h4>
-                    <p class="text-gray-400">We offer top-tier escort, defense, and patrol services. Expertise in fighter combat, anti-piracy operations, and coordinated fleet maneuvers.</p>
+                    <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Tactical Security</h4>
+                    <p class="text-[#E1E1E1]">We offer top-tier escort, defense, and patrol services. Expertise in fighter combat, anti-piracy operations, and coordinated fleet maneuvers.</p>
                 </div>
 
-                <!-- Logistics & Support (Cargo Container Icon) -->
+                <!-- Logistics & Support (Icon Removed) -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
-                    <svg class="w-12 h-12 text-blue-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7L4 7m16 0L4 7m16 0v10a2 2 0 01-2 2H6a2 2 0 01-2-2V7m16 0h2m-2 0V5a2 2 0 00-2-2H6a2 2 0 00-2 2v2m16 0h2m-2 0L4 7m16 0L4 7"></path></svg>
-                    <h4 class="text-xl font-semibold mb-3 text-white">Logistics & Support</h4>
-                    <p class="text-gray-400">Efficient and protected trade routes. We value expert haulers, salvagers, and miners who can sustain our operations on the frontier.</p>
+                    <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Logistics & Support</h4>
+                    <p class="text-[#E1E1E1]">Efficient and protected trade routes. We value expert haulers, salvagers, and miners who can sustain our operations on the frontier.</p>
                 </div>
 
-                <!-- Brotherhood of the Stars (Handshake Icon) -->
+                <!-- Brotherhood of the Stars (Icon Removed) -->
                 <div class="focus-card p-6 rounded-xl text-center shadow-2xl">
-                    <svg class="w-12 h-12 text-blue-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15h2m-2-4h2m-2 8a9 9 0 100-18 9 9 0 000 18z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-1-1m-4 0l-1 1m-4 0l-1 1m16 0l-1-1"></path></svg>
-                    <h4 class="text-xl font-semibold mb-3 text-white">Brotherhood of the Stars</h4>
-                    <p class="text-gray-400">A friendly, non-toxic environment focused on maturity and collaboration. We train together and fly for the success of the unit.</p>
+                    <h4 class="text-xl font-semibold mb-3 text-[#E1E1E1]">Brotherhood of the Stars</h4>
+                    <p class="text-[#E1E1E1]">A friendly, non-toxic environment focused on maturity and collaboration. We train together and fly for the success of the unit.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 3. PC Requirements Section -->
-    <section id="requirements" class="py-20 bg-gray-800 border-t border-b border-gray-700">
+    <section id="requirements" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-white section-header inline-block">System Readiness</h2>
-                <p class="text-gray-400 mt-2">Star Citizen is demanding. Ensure your rig is ready for the 'Verse.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">System Readiness</h2>
+                <p class="mt-2 text-[#E1E1E1]">Star Citizen is demanding. Ensure your rig is ready for the 'Verse.</p>
             </header>
 
             <div class="overflow-x-auto rounded-xl shadow-2xl">
-                <table class="min-w-full divide-y divide-gray-700">
+                <table class="min-w-full divide-y divide-[#70707D]">
                     <thead>
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider req-header rounded-tl-xl">Component</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium text-gray-300 uppercase tracking-wider req-header">Minimum (Playable)</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium text-gray-300 uppercase tracking-wider req-header rounded-tr-xl">Recommended (Smooth)</th>
+                            <!-- Header row uses darkest color and white text -->
+                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider req-header rounded-tl-xl">Component</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header">Minimum (Playable)</th>
+                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header rounded-tr-xl">Recommended (Smooth)</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-gray-700 divide-y divide-gray-600 text-sm">
+                    <!-- Body uses alternating dark/darker backgrounds and all white text -->
+                    <tbody class="divide-y divide-gray-700 text-sm text-white">
                         <!-- OS -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-white font-medium">Operating System</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">Windows 10 (64-bit)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">Windows 10 / 11 (64-bit)</td>
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Operating System</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 (64-bit)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 / 11 (64-bit)</td>
                         </tr>
                         <!-- CPU -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-white font-medium">Processor (CPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">Quad-Core CPU (Intel i7 or AMD Bulldozer/Ryzen 5)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">Quad/Eight-Core, High Clock Speed (i7 or Ryzen 7 class)</td>
+                        <tr class="req-table-dark">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Processor (CPU)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad-Core CPU (Intel i7 or AMD Bulldozer/Ryzen 5)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad/Eight-Core, High Clock Speed (i7 or Ryzen 7 class)</td>
                         </tr>
                         <!-- RAM -->
-                        <tr class="bg-gray-600">
-                            <td class="px-6 py-4 whitespace-nowrap text-white font-medium">Memory (RAM)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-yellow-300 font-bold">16 GB (Bare Minimum)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-green-400 font-bold">32 GB+ (Highly Recommended)</td>
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Memory (RAM)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F9744B]">16 GB (Bare Minimum)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">32 GB+ (Highly Recommended)</td>
                         </tr>
                         <!-- GPU -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-white font-medium">Graphics Card (GPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">DirectX 11 compatible with 4 GB VRAM</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-gray-300">DirectX 12 compatible with 8 GB+ VRAM (e.g., RTX 3060 / RX 6700 XT)</td>
+                        <tr class="req-table-dark">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Graphics Card (GPU)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 11 compatible with 4 GB VRAM</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 12 compatible with 8 GB+ VRAM (e.g., RTX 3060 / RX 6700 XT)</td>
                         </tr>
                         <!-- Storage -->
-                        <tr class="bg-gray-600">
-                            <td class="px-6 py-4 whitespace-nowrap text-white font-medium">Storage</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-red-300 font-bold">SSD Required (100GB+ free space)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-green-400 font-bold">NVMe SSD (For best performance)</td>
+                        <tr class="req-table-light">
+                            <td class="px-6 py-4 whitespace-nowrap font-medium">Storage</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F87171]">SSD Required (100GB+ free space)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">NVMe SSD (For best performance)</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
-            <p class="text-center text-sm text-gray-500 mt-6">
-                <span class="font-bold text-yellow-400">IMPORTANT:</span> The game is in active development and performance varies. **An SSD and 32GB of RAM are strongly advised for a stable experience.**
+            <p class="text-center text-sm text-[#E1E1E1] mt-6">
+                <span class="font-bold text-[#FFB703]">IMPORTANT:</span> The game is in active development and performance varies. **An SSD and 32GB of RAM are strongly advised for a stable experience.**
             </p>
         </div>
     </section>
     
     <!-- 4. Final CTA/Footer -->
-    <footer class="bg-gray-900 py-12">
+    <footer class="bg-[#1D2429] py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
-            <h3 class="text-3xl font-bold text-white mb-4">Start Your Career in the 'Verse</h3>
-            <p class="text-gray-400 mb-8">Click below to generate a randomized referral link for your starting bonus, then join our comms.</p>
+            <h3 class="text-3xl font-bold mb-4 text-[#E1E1E1]">Start Your Career in the 'Verse</h3>
+            <p class="mb-8 text-[#E1E1E1]">Click below to generate a randomized referral link for your starting bonus, then join our comms.</p>
 
             <!-- Referral Code Section - Now directly links to RSI -->
             <div class="referral-box mt-8 max-w-xl mx-auto">
-                <p class="text-yellow-400 font-semibold mb-4">
+                <p class="font-semibold mb-4 text-[#E1E1E1]">
                     ✨ **Free 50,000 UEC Bonus!** Click below to automatically include a random organization referral code and claim your bonus.
                 </p>
-                <button onclick="generateRandomLink()" id="referralButton" class="cta-button inline-flex items-center justify-center px-6 py-3 border border-blue-400 text-base font-semibold rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none transition duration-300">
+                <button onclick="generateRandomLink()" id="referralButton" class="cta-button inline-flex items-center justify-center px-6 py-3 border border-[#FFB703] text-base font-semibold rounded-lg text-white bg-[#FFB703] hover:bg-[#CC9202] focus:outline-none transition duration-300">
                     Get Random Referral Link to RSI
                 </button>
-                <p id="codeResult" class="mt-4 hidden text-sm text-gray-400">
+                <p id="codeResult" class="mt-4 hidden text-sm text-[#E1E1E1]">
                     Redirecting you now...
                 </p>
             </div>
             
-            <p class="text-gray-500 mt-6 text-sm">
-                Already have a game package? <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="text-blue-400 hover:text-blue-300 font-semibold underline">Join our Discord directly.</a>
+            <p class="text-[#E1E1E1] mt-6 text-sm">
+                Already have a game package? <a href="https://discord.com/invite/5dEV9zJAQu" target="_blank" class="text-[#FFB703] hover:text-[#CC9202] font-semibold underline">Join our Discord directly.</a>
             </p>
         </div>
     </footer>
@@ -253,7 +266,7 @@
             const resultElement = document.getElementById('codeResult');
             buttonElement.textContent = "Generating Link...";
             buttonElement.disabled = true;
-            buttonElement.classList.remove('bg-green-600', 'hover:bg-green-700');
+            buttonElement.classList.remove('bg-[#FFB703]', 'hover:bg-[#CC9202]');
             buttonElement.classList.add('bg-gray-500');
             resultElement.classList.remove('hidden');
 
@@ -269,10 +282,10 @@
             setTimeout(() => {
                 window.open(fullLink, '_blank');
                 
-                // Reset the UI (optional, since the user is likely leaving)
+                // Reset the UI 
                 buttonElement.textContent = "Get Random Referral Link to RSI";
                 buttonElement.disabled = false;
-                buttonElement.classList.add('bg-green-600', 'hover:bg-green-700');
+                buttonElement.classList.add('bg-[#FFB703]', 'hover:bg-[#CC9202]');
                 buttonElement.classList.remove('bg-gray-500');
                 resultElement.classList.add('hidden');
 
