@@ -28,7 +28,8 @@
         /* Hero Section Styling */
         .hero-bg {
             /* PATH CHANGED TO LOOK FOR .JPG EXTENSION */
-            background-image: url('hero-bg.jpg');
+            /* NOTE: This will appear as a broken image in the preview */
+            background-image: url('https://placehold.co/1200x800/293438/E1E1E1?text=SPACE+BACKGROUND+PLACEHOLDER'); 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -108,7 +109,8 @@
             <div class="space-x-4 flex">
                 <a href="#hero" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
                 <a href="#mission" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
-                <a href="#requirements" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Specs</a>
+                <!-- UPDATED NAV LINK -->
+                <a href="#fleet" class="text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
             </div>
         </nav>
 
@@ -116,10 +118,10 @@
     <!-- 1. Hero Section: The Call to Action -->
     <section id="hero" class="hero-bg h-screen flex items-center justify-center text-center px-4 sm:px-6 lg:px-8">
         <div class="z-10 max-w-4xl space-y-8">
-             <!-- Centered Logo Above Text -->
-        <div class="flex justify-center mb-4">
-            <img src="Philippines-ArmadaIFPH_11_Logo.png" alt="IFPH Logo" class="h-48 w-auto">
-        </div>
+            <!-- Centered Logo Above Text (Using placeholder for preview) -->
+            <div class="flex justify-center mb-4">
+                <img src="https://placehold.co/100x100/1D2429/FFB703?text=LOGO" alt="IFPH Logo" class="h-48 w-auto">
+            </div>
             <p class="uppercase tracking-widest text-sm sm:text-base text-[#E1E1E1]">OFFICIAL PHILIPPINE ORGANIZATION FOR STAR CITIZEN</p>
             <h2 class="text-5xl sm:text-7xl font-black leading-tight shadow-text text-[#FFB703]">
                 INTERGALACTIC FEDERATION OF THE PHILIPPINE
@@ -180,62 +182,27 @@
         </div>
     </section>
 
-    <!-- 3. PC Requirements Section -->
-    <section id="requirements" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- 3. Fleet Stats Section (Replaces System Requirements) -->
+    <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">System Readiness</h2>
-                <p class="mt-2 text-[#E1E1E1]">Star Citizen is demanding. Ensure your rig is ready for the 'Verse.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Stats (Live Feed)</h2>
+                <p class="mt-2 text-[#E1E1E1]">A real-time overview of the organization's total assets and ships, powered by Fleetyards.net.</p>
             </header>
-
-            <div class="overflow-x-auto rounded-xl shadow-2xl">
-                <table class="min-w-full divide-y divide-[#70707D]">
-                    <thead>
-                        <tr>
-                            <!-- Header row uses darkest color and white text -->
-                            <th class="px-6 py-4 text-left text-xs font-medium uppercase tracking-wider req-header rounded-tl-xl">Component</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header">Minimum (Playable)</th>
-                            <th class="px-6 py-4 text-center text-xs font-medium uppercase tracking-wider req-header rounded-tr-xl">Recommended (Smooth)</th>
-                        </tr>
-                    </thead>
-                    <!-- Body uses alternating dark/darker backgrounds and all white text -->
-                    <tbody class="divide-y divide-gray-700 text-sm text-white">
-                        <!-- OS -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Operating System</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 (64-bit)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Windows 10 / 11 (64-bit)</td>
-                        </tr>
-                        <!-- CPU -->
-                        <tr class="req-table-dark">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Processor (CPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad-Core CPU (Intel i7 or AMD Bulldozer/Ryzen 5)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">Quad/Eight-Core, High Clock Speed (i7 or Ryzen 7 class)</td>
-                        </tr>
-                        <!-- RAM -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Memory (RAM)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F9744B]">16 GB (Bare Minimum)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">32 GB+ (Highly Recommended)</td>
-                        </tr>
-                        <!-- GPU -->
-                        <tr class="req-table-dark">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Graphics Card (GPU)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 11 compatible with 4 GB VRAM</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center text-[#E1E1E1]">DirectX 12 compatible with 8 GB+ VRAM (e.g., RTX 3060 / RX 6700 XT)</td>
-                        </tr>
-                        <!-- Storage -->
-                        <tr class="req-table-light">
-                            <td class="px-6 py-4 whitespace-nowrap font-medium">Storage</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#F87171]">SSD Required (100GB+ free space)</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-center font-bold text-[#10B981]">NVMe SSD (For best performance)</td>
-                        </tr>
-                    </tbody>
-                </table>
+            
+            <!-- Responsive Iframe Container for Fleetyards Stats -->
+            <div class="relative overflow-hidden pt-[150%] rounded-xl shadow-2xl">
+                <iframe 
+                    src="https://fleetyards.net/fleets/ifph/stats/" 
+                    frameborder="0" 
+                    scrolling="yes"
+                    class="absolute top-0 left-0 w-full h-full"
+                    title="IFPH Fleet Statistics">
+                </iframe>
             </div>
             
             <p class="text-center text-sm text-[#E1E1E1] mt-6">
-                <span class="font-bold text-[#FFB703]">IMPORTANT:</span> The game is in active development and performance varies. **An SSD and 32GB of RAM are strongly advised for a stable experience.**
+                <span class="font-bold text-[#FFB703]">DATA SOURCE:</span> Fleetyards.net. Data updates automatically.
             </p>
         </div>
     </section>
@@ -275,8 +242,7 @@
             "STAR-V77G-4YNY", "STAR-RZB2-2VJQ", "STAR-63FV-NQFB",
             "STAR-KN4W-PQRT", "STAR-T2XQ-XW3C", "STAR-6VJN-Q4LH",
             "STAR-T2TZ-QPVC", "STAR-RV3D-VVVK", "STAR-SD2Y-T292",
-            "STAR-HTNY-T4QL", "STAR-95VX-DSKD", "STAR-B6NP-C3L5",
-            "STAR-6PCL-7DNB"
+            "STAR-HTNY-T4QL", "STAR-95VX-DSKD"
         ];
 
         function generateRandomLink() {
