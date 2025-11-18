@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | IFPH</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js Library for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <style>
         /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
         /* Primary Text: #E1E1E1 (Light Silver) */
@@ -182,28 +184,25 @@
         </div>
     </section>
 
-    <!-- 3. Fleet Stats Section (Replaces System Requirements) -->
+    <!-- 3. Fleet Stats Section (Interactive Chart) -->
     <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Stats (Live Feed)</h2>
-                <p class="mt-2 text-[#E1E1E1]">A real-time overview of the organization's total assets and ships, powered by Fleetyards.net.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Growth (Historical)</h2>
+                <p class="mt-2 text-[#E1E1E1]">Tracking the growth of IFPH's total ship count over the past several months.</p>
             </header>
             
-            <!-- Responsive Iframe Container for Fleetyards Stats -->
-            <div class="relative overflow-hidden pt-[150%] rounded-xl shadow-2xl">
-                <iframe 
-                    src="https://fleetyards.net/fleets/ifph/stats/" 
-                    frameborder="0" 
-                    scrolling="yes"
-                    class="absolute top-0 left-0 w-full h-full"
-                    title="IFPH Fleet Statistics">
-                </iframe>
+            <!-- Chart Container -->
+            <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl">
+                <canvas id="fleetGrowthChart"></canvas>
             </div>
-            
-            <p class="text-center text-sm text-[#E1E1E1] mt-6">
-                <span class="font-bold text-[#FFB703]">DATA SOURCE:</span> Fleetyards.net. Data updates automatically.
-            </p>
+
+            <!-- Fleetyards Link -->
+            <div class="flex justify-center mt-8">
+                <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
+                    View Current Live Stats on Fleetyards
+                </a>
+            </div>
         </div>
     </section>
     
@@ -214,7 +213,7 @@
             <h3 class="text-3xl font-bold mb-4 text-[#E1E1E1]">Start Your Career in the 'Verse</h3>
             <p class="mb-8 text-[#E1E1E1]">Click below to generate a randomized referral link for your starting bonus, then join our comms.</p>
 
-            <!-- Referral Code Section - Now directly links to RSI -->
+            <!-- Referral Code Section -->
             <div class="referral-box mt-8 max-w-xl mx-auto">
                 <p class="font-semibold mb-4 text-[#E1E1E1]">
                     ✨ **Free 50,000 UEC Bonus!** Click below to automatically include a random organization referral code and claim your bonus.
@@ -233,9 +232,66 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Random Code Selection and Link Generation -->
+    <!-- JavaScript for Chart Generation and Random Link -->
     <script>
-        // Array of all available referral codes
+        // --- CHART DATA (You would update this section weekly/monthly) ---
+        const fleetData = {
+            labels: ['Sep 2025', 'Oct 2025', 'Nov 2025', 'Dec 2025'],
+            datasets: [{
+                label: 'Total Ships',
+                data: [45, 52, 60, 68], // Example ship count data
+                backgroundColor: 'rgba(255, 183, 3, 0.7)', // Gold-Orange
+                borderColor: '#FFB703',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        };
+
+        // --- CHART CONFIGURATION ---
+        const config = {
+            type: 'bar', // Can be 'line', 'bar', 'pie', etc.
+            data: fleetData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#E1E1E1', // Silver
+                            font: { size: 14 }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'IFPH Total Ship Count',
+                        color: '#E1E1E1', // Silver
+                        font: { size: 16, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#70707D' }, // Dark Grey
+                        grid: { color: 'rgba(112, 112, 125, 0.2)' } // Faint grid lines
+                    },
+                    x: {
+                        ticks: { color: '#70707D' }, // Dark Grey
+                        grid: { display: false }
+                    }
+                }
+            }
+        };
+
+        // --- CHART INITIALIZATION ---
+        window.onload = function() {
+            // Ensure the canvas context exists before creating the chart
+            const ctx = document.getElementById('fleetGrowthChart');
+            if (ctx) {
+                new Chart(ctx, config);
+            }
+        };
+
+        // --- RANDOM REFERRAL LINK FUNCTION (Kept for completeness) ---
         const referralCodes = [
             "STAR-YPF4-XNG9", "STAR-HG52-DCDT", "STAR-52Y6-6GQL",
             "STAR-SYX5-FPH2", "STAR-TGR9-GTLF", "STAR-MHR4-H297",
@@ -246,7 +302,6 @@
         ];
 
         function generateRandomLink() {
-            // 1. Disable button and show message
             const buttonElement = document.getElementById('referralButton');
             const resultElement = document.getElementById('codeResult');
             buttonElement.textContent = "Generating Link...";
@@ -255,26 +310,21 @@
             buttonElement.classList.add('bg-gray-500');
             resultElement.classList.remove('hidden');
 
-            // 2. Select a random code
             const randomIndex = Math.floor(Math.random() * referralCodes.length);
             const randomCode = referralCodes[randomIndex];
-
-            // 3. Build the full RSI referral URL
             const baseUrl = "https://robertsspaceindustries.com/enlist?referral=";
             const fullLink = baseUrl + randomCode;
 
-            // 4. Redirect the user after a short delay for visual confirmation
             setTimeout(() => {
                 window.open(fullLink, '_blank');
                 
-                // Reset the UI 
                 buttonElement.textContent = "Get Random Referral Link to RSI";
                 buttonElement.disabled = false;
                 buttonElement.classList.add('bg-[#FFB703]', 'hover:bg-[#CC9202]');
                 buttonElement.classList.remove('bg-gray-500');
                 resultElement.classList.add('hidden');
 
-            }, 500); // 0.5 second delay
+            }, 500);
         }
     </script>
 
