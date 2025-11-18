@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | IFPH</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Chart.js Library for interactive charts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <style>
         /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
         /* Primary Text: #E1E1E1 (Light Silver) */
@@ -184,23 +182,49 @@
         </div>
     </section>
 
-    <!-- 3. Fleet Stats Section (Interactive Chart) -->
+    <!-- 3. Fleet Stats Section (Live Fleetyards API Data) -->
     <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Growth (Historical)</h2>
-                <p class="mt-2 text-[#E1E1E1]">Tracking the growth of IFPH's total ship count over the past several months.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">Live Fleet Stats</h2>
+                <p class="mt-2 text-[#E1E1E1]">Real-time statistics fetched directly from the IFPH Fleetyards API.</p>
             </header>
             
-            <!-- Chart Container -->
-            <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl">
-                <canvas id="fleetGrowthChart"></canvas>
+            <!-- Live Data Display Panel -->
+            <div id="fleet-stats-display" class="bg-[#1D2429] p-6 rounded-xl shadow-2xl">
+                
+                <!-- Loading State / Error State -->
+                <div id="loading-state" class="text-center py-8 text-[#FFB703]">
+                    <p class="text-xl font-semibold">Fetching Live Fleet Data...</p>
+                    <p class="text-sm mt-2">Connecting to Fleetyards API...</p>
+                </div>
+
+                <!-- Metrics will be injected here -->
+                <div id="metrics-container" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    
+                    <div class="p-4 border border-[#70707D] rounded-lg">
+                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Total Ships</p>
+                        <p id="total-ships" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
+                    </div>
+                    
+                    <div class="p-4 border border-[#70707D] rounded-lg">
+                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Estimated Value</p>
+                        <p id="total-value" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
+                    </div>
+                    
+                    <div class="p-4 border border-[#70707D] rounded-lg">
+                        <p class="text-sm uppercase text-[#FFB703] tracking-wider">Ships of Interest</p>
+                        <p id="ships-of-interest" class="text-4xl font-black mt-1 text-[#E1E1E1]">--</p>
+                    </div>
+
+                </div>
+
             </div>
 
             <!-- Fleetyards Link -->
             <div class="flex justify-center mt-8">
                 <a href="https://fleetyards.net/fleets/ifph/stats/" target="_blank" class="cta-button inline-flex items-center justify-center px-8 py-3 border border-transparent text-sm font-semibold rounded-lg shadow-xl text-white bg-[#FFB703] hover:bg-[#CC9202] transition duration-300">
-                    View Current Live Stats on Fleetyards
+                    View Detailed Fleet Stats on Fleetyards
                 </a>
             </div>
         </div>
@@ -232,65 +256,61 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Chart Generation and Random Link -->
+    <!-- JavaScript for Live Data Fetching and Random Link -->
     <script>
-        // --- CHART DATA (You would update this section weekly/monthly) ---
-        const fleetData = {
-            labels: ['Sep 2025', 'Oct 2025', 'Nov 2025', 'Dec 2025'],
-            datasets: [{
-                label: 'Total Ships',
-                data: [45, 52, 60, 68], // Example ship count data
-                backgroundColor: 'rgba(255, 183, 3, 0.7)', // Gold-Orange
-                borderColor: '#FFB703',
-                borderWidth: 1,
-                borderRadius: 4
-            }]
-        };
+        const FLEET_SLUG = 'ifph'; // Your Fleetyards Organization Slug
+        const API_URL = `https://fleetyards.net/api/v1/fleets/${FLEET_SLUG}/stats/`;
 
-        // --- CHART CONFIGURATION ---
-        const config = {
-            type: 'bar', // Can be 'line', 'bar', 'pie', etc.
-            data: fleetData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#E1E1E1', // Silver
-                            font: { size: 14 }
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'IFPH Total Ship Count',
-                        color: '#E1E1E1', // Silver
-                        font: { size: 16, weight: 'bold' }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { color: '#70707D' }, // Dark Grey
-                        grid: { color: 'rgba(112, 112, 125, 0.2)' } // Faint grid lines
-                    },
-                    x: {
-                        ticks: { color: '#70707D' }, // Dark Grey
-                        grid: { display: false }
-                    }
+        // Utility function to format numbers for readability (e.g., 123,456.00)
+        const formatter = new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+
+        // Function to fetch and display live fleet data
+        async function fetchFleetStats() {
+            const loadingState = document.getElementById('loading-state');
+            const metricsContainer = document.getElementById('metrics-container');
+            
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            }
-        };
+                
+                const data = await response.json();
+                
+                // --- Data Processing and Display ---
+                
+                // Format total estimated value (assuming this comes in USD or similar)
+                const totalValue = data.total_estimated_value 
+                    ? `$${formatter.format(data.total_estimated_value)}`
+                    : 'N/A';
+                
+                // Display the main metrics
+                document.getElementById('total-ships').textContent = formatter.format(data.total_ships);
+                document.getElementById('total-value').textContent = totalValue;
+                
+                // Fleetyards API often returns metrics like 'total_fleet_cap', using a fallback for "Ships of Interest"
+                const specialMetric = data.total_fleet_cap || data.total_fleet_mass || 'N/A';
+                document.getElementById('ships-of-interest').textContent = formatter.format(specialMetric);
 
-        // --- CHART INITIALIZATION ---
-        window.onload = function() {
-            // Ensure the canvas context exists before creating the chart
-            const ctx = document.getElementById('fleetGrowthChart');
-            if (ctx) {
-                new Chart(ctx, config);
-            }
-        };
+                // Show the metrics and hide loading
+                loadingState.classList.add('hidden');
+                metricsContainer.classList.remove('hidden');
 
+            } catch (error) {
+                console.error("Could not fetch Fleetyards stats:", error);
+                
+                // Display error message
+                loadingState.innerHTML = `<p class="text-xl font-semibold text-red-500">Error: Could not load live data.</p>
+                                          <p class="text-sm mt-2 text-[#E1E1E1]">The Fleetyards API may be temporarily unavailable or the organization slug is incorrect.</p>`;
+                loadingState.classList.remove('hidden');
+                metricsContainer.classList.add('hidden');
+            }
+        }
+        
         // --- RANDOM REFERRAL LINK FUNCTION (Kept for completeness) ---
         const referralCodes = [
             "STAR-YPF4-XNG9", "STAR-HG52-DCDT", "STAR-52Y6-6GQL",
@@ -326,6 +346,9 @@
 
             }, 500);
         }
+
+        // Initialize the fetch when the page loads
+        window.onload = fetchFleetStats;
     </script>
 
 </body>
