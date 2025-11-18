@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recruitment | IFPH</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Chart.js Library for interactive charts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <style>
         /* Define custom Tailwind colors using the new Trendy Grey palette + Gold-Orange Accent */
         /* Primary Text: #E1E1E1 (Light Silver) */
@@ -103,6 +101,19 @@
             border: 1px solid #FFB703;
             color: #E1E1E1;
         }
+        /* Gallery Styles */
+        .gallery-image {
+            width: 100%;
+            height: 250px; /* Fixed height for consistent look */
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #1D2429;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .gallery-image:hover {
+            transform: scale(1.03);
+            border-color: #FFB703;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -119,7 +130,8 @@
             <div class="flex items-center space-x-4">
                 <a href="#hero" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Home</a>
                 <a href="#mission" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Our Mission</a>
-                <a href="#fleet" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Fleet</a>
+                <!-- Updated Nav Link -->
+                <a href="#gallery" class="hidden sm:inline-block text-sm font-medium hover:text-[#FFB703] transition duration-150">Gallery</a>
                 
                 <!-- NEW: Ambient Sound Toggle Button - Uses Play icon as default -->
                 <button id="audio-toggle" class="p-2 rounded-full bg-[#FFB703] text-[#1D2429] hover:bg-[#CC9202] transition duration-150 focus:outline-none" title="Toggle Ambient Sound">
@@ -208,15 +220,15 @@
         </div>
     </section>
 
-    <!-- 3. Fleet Stats Section (Interactive Chart Dashboard) -->
-    <section id="fleet" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
+    <!-- 3. Fleet Gallery Section (Replaces Charts) -->
+    <section id="gallery" class="py-20 bg-[#293438] border-t border-b border-[#70707D]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <header class="text-center mb-12">
-                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">IFPH Fleet Composition</h2>
-                <p class="mt-2 text-[#E1E1E1]">A detailed look at the types and numbers of ships within the organization's roster.</p>
+                <h2 class="text-4xl font-bold section-header inline-block text-[#E1E1E1]">Action Gallery</h2>
+                <p class="mt-2 text-[#E1E1E1]">Moments from the black: Screenshots of our fleet in combat, transit, and exploration.</p>
             </header>
             
-            <!-- NEW: Discord Member Stat Card -->
+            <!-- Discord Member Stat Card -->
             <div class="bg-[#1D2429] p-4 rounded-xl shadow-2xl mb-8 flex items-center justify-center stat-card">
                 <svg class="w-8 h-8 mr-3 text-[#FFB703]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132A1 1 0 0014.752 11.168z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <p class="text-xl font-semibold uppercase tracking-wider">
@@ -224,23 +236,49 @@
                 </p>
             </div>
 
-            <!-- Charts Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Image Grid Gallery -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 
-                <!-- Chart 1: Ships by Classification (Doughnut) -->
-                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-1" style="height: 350px;">
-                    <canvas id="classificationChart"></canvas>
-                </div>
+                <!-- Image Placeholder 1 -->
+                <a href="https://placehold.co/800x600/FFB703/1D2429?text=FLEET+ACTION+1" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/FFB703/1D2429?text=FLEET+ACTION+1" alt="Squadron in formation" class="gallery-image">
+                </a>
 
-                <!-- Chart 2: Ships by Size (Doughnut) -->
-                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-1" style="height: 350px;">
-                    <canvas id="sizeChart"></canvas>
-                </div>
+                <!-- Image Placeholder 2 -->
+                <a href="https://placehold.co/800x600/70707D/1D2429?text=CAPITAL+SHIP+DEFENSE" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/70707D/1D2429?text=CAPITAL+SHIP+DEFENSE" alt="Capital ship defense" class="gallery-image">
+                </a>
 
-                <!-- Chart 3: Top 10 Ship Models (Bar/Horizontal) -->
-                <div class="bg-[#1D2429] p-6 rounded-xl shadow-2xl lg:col-span-3" style="height: 450px;">
-                    <canvas id="topModelsChart"></canvas>
-                </div>
+                <!-- Image Placeholder 3 -->
+                <a href="https://placehold.co/800x600/E1E1E1/1D2429?text=EXPLORATION+SHOT" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/E1E1E1/1D2429?text=EXPLORATION+SHOT" alt="Exploration scene" class="gallery-image">
+                </a>
+
+                <!-- Image Placeholder 4 -->
+                <a href="https://placehold.co/800x600/F87171/1D2429?text=GROUND+OPERATION" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/F87171/1D2429?text=GROUND+OPERATION" alt="Ground troops preparing" class="gallery-image">
+                </a>
+                
+                <!-- Image Placeholder 5 -->
+                <a href="https://placehold.co/800x600/10B981/1D2429?text=JUMP+POINT" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/10B981/1D2429?text=JUMP+POINT" alt="Entering jump point" class="gallery-image">
+                </a>
+                
+                <!-- Image Placeholder 6 -->
+                <a href="https://placehold.co/800x600/4b5563/1D2429?text=MINING+OPERATION" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/4b5563/1D2429?text=MINING+OPERATION" alt="Mining operation" class="gallery-image">
+                </a>
+                
+                <!-- Image Placeholder 7 -->
+                <a href="https://placehold.co/800x600/93c5fd/1D2429?text=FORMATION+FLYING" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/93c5fd/1D2429?text=FORMATION+FLYING" alt="Tight ship formation" class="gallery-image">
+                </a>
+                
+                <!-- Image Placeholder 8 -->
+                <a href="https://placehold.co/800x600/d1d5db/1D2429?text=FLEET+IN+TRANSIT" target="_blank" class="block">
+                    <img src="https://placehold.co/800x600/d1d5db/1D2429?text=FLEET+IN+TRANSIT" alt="Ships in deep space transit" class="gallery-image">
+                </a>
+                
             </div>
 
             <!-- Fleetyards Link -->
@@ -278,93 +316,8 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Charts and Random Link -->
+    <!-- JavaScript for Random Link and Audio -->
     <script>
-        // --- DATA SETUP (Update these objects to reflect real stats) ---
-        const CHART_COLORS = [
-            '#FFB703', '#70707D', '#E1E1E1', '#F87171', '#10B981', '#4b5563', '#93c5fd', '#d1d5db', '#1f2937'
-        ];
-
-        // 1. Ships by Classification
-        const classificationData = {
-            labels: ['Fighter', 'Support', 'Heavy Combat', 'Transport', 'Exploration', 'Industrial'],
-            datasets: [{
-                data: [40, 18, 12, 15, 8, 7], // Total percentage = 100
-                backgroundColor: [CHART_COLORS[0], CHART_COLORS[1], CHART_COLORS[3], CHART_COLORS[4], CHART_COLORS[5], CHART_COLORS[6]],
-                hoverOffset: 12,
-            }]
-        };
-
-        // 2. Ships by Size
-        const sizeData = {
-            labels: ['Small (S)', 'Medium (M)', 'Large (L)', 'Capital (XL)'],
-            datasets: [{
-                data: [55, 30, 10, 5],
-                backgroundColor: [CHART_COLORS[0], CHART_COLORS[3], CHART_COLORS[4], CHART_COLORS[1]],
-                hoverOffset: 12,
-            }]
-        };
-
-        // 3. Top 10 Ship Models (Horizontal Bar Chart)
-        const topModelsData = {
-            labels: ['Aurora MR', 'Arrow', 'Cutlass Black', 'C8 Pisces', 'Mantis', 'Hammerhead', 'Carrack', 'Prospector', 'Mole', 'Ares Inferno'],
-            datasets: [{
-                label: 'Ship Count',
-                data: [15, 12, 10, 9, 8, 5, 4, 3, 2, 2],
-                backgroundColor: CHART_COLORS[0],
-                borderColor: CHART_COLORS[0],
-                borderWidth: 1,
-            }]
-        };
-
-        // --- CHART CONFIGURATION UTILITY ---
-        function getChartConfig(type, data, title) {
-            return {
-                type: type,
-                data: data,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: type === 'bar' ? 'y' : 'x', // Horizontal bar chart
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#E1E1E1',
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: title,
-                            color: '#FFB703',
-                            font: { size: 16, weight: 'bold', family: 'Rajdhani' }
-                        }
-                    },
-                    scales: type !== 'doughnut' ? { // Only apply scales to bar charts
-                        y: {
-                            ticks: { color: '#70707D' },
-                            grid: { color: 'rgba(112, 112, 125, 0.2)' }
-                        },
-                        x: {
-                            ticks: { color: '#70707D' },
-                            grid: { color: 'rgba(112, 112, 125, 0.2)' }
-                        }
-                    } : {}
-                }
-            };
-        }
-
-        // --- CHART INITIALIZATION ---
-        window.onload = function() {
-            // 1. Classification Chart
-            new Chart(document.getElementById('classificationChart'), getChartConfig('doughnut', classificationData, 'Ships by Classification'));
-            
-            // 2. Size Chart
-            new Chart(document.getElementById('sizeChart'), getChartConfig('doughnut', sizeData, 'Ships by Size'));
-
-            // 3. Top Models Chart
-            new Chart(document.getElementById('topModelsChart'), getChartConfig('bar', topModelsData, 'Top 10 Ship Models (Count)'));
-        };
-
         // --- RANDOM REFERRAL LINK FUNCTION (Kept for completeness) ---
         const referralCodes = [
             "STAR-YPF4-XNG9", "STAR-HG52-DCDT", "STAR-52Y6-6GQL",
